@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/users', function () {
-    return view('users/index');
-});
 
-Route::get('/signup', function () {
-    return view('users/signup');
-});
-Route::get('/login', function () {
-    return view('users/login');
-});
+// Routes for dashboard
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+// Routes for users
+Route::get('/signup', [UserController::class, 'signup']);
+Route::post('/users/create', [UserController::class, 'create']);
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+
+// Routes for login
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 // Routes for posts
 Route::get('/posts', [PostController::class, 'index']);

@@ -10,5 +10,3 @@
         </div>    
     </div>
 @endsection
-
-{{-- <form class="ms-1" action="/posts/{{ $post->id }}/delete" method="POST">@csrf<button class="btn btn-danger" type="submit">Hapus</button></form> --}}
